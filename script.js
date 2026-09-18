@@ -1,34 +1,27 @@
+function pad(n) {
+    return (n < 10) ? "0" + n : n;
+}
+
 function updateTime() {
     var date = new Date();
-    var h = date.getHours();
-    var m = date.getMinutes();
-    var s = date.getSeconds();
-
-    h = (h < 10) ? "0" + h : h;
-    m = (m < 10) ? "0" + m : m;
-    s = (s < 10) ? "0" + s : s;
-
-    time = h + " : " + m + " : " + s;
-    document.getElementById("time").innerText = time;
+    var time = pad(date.getHours()) + " : " + pad(date.getMinutes()) + " : " + pad(date.getSeconds());
     document.getElementById("time").textContent = time;
-    setTimeout(updateTime, 1000)
 }
 
 function updateDate() {
     var date = new Date();
-    var d = date.getDate();
-    var m = date.getMonth();
-    var y = date.getFullYear();
-
-    d = (d < 10) ? "0" + d : d;
-    m = (m < 10) ? "0" + m : m;
-    y = (y < 10) ? "0" + y : y;
-
-    output = d + "/" + m + "/" + y;
-    document.getElementById("date").innerText = output;
+    var output = pad(date.getDate()) + "/" + pad(date.getMonth() + 1) + "/" + date.getFullYear();
     document.getElementById("date").textContent = output;
-    setTimeout(updateDate, 1000);
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    updateTime();
+    updateDate();
+    setInterval(function () {
+        updateTime();
+        updateDate();
+    }, 1000);
+});
 
 // SIDEBAR //
 
